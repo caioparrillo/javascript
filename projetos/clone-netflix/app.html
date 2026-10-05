@@ -18,24 +18,40 @@
     <div class="container">
         <pre id="debug"></pre>
         <h1>Filmes</h1>
-        <form class="jumbotrom">
+        <form class="jumbotron">
             <div class="row">
-                <!-- Titulo -->
+                <!-- Título -->
                 <div class="col-4">
-                    <label for="">Título</label>
-                    <input type="text" class="form-control" placeholder="Título" onkeyup="atualizarDados()" id="titulo">
+                    <label for="titulo">Título</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Título"
+                        onkeyup="atualizarDados()"
+                        id="titulo"
+                    >
                 </div>
 
                 <!-- Link -->
                 <div class="col-3">
-                    <label for="">Link</label>
-                    <input type="url" class="form-control" placeholder="URL" onkeyup="atualizarDados()" id="link">
+                    <label for="link">Link</label>
+                    <input
+                        type="url"
+                        class="form-control"
+                        placeholder="URL"
+                        onkeyup="atualizarDados()"
+                        id="link"
+                    >
                 </div>
-                
+
                 <!-- Categoria -->
                 <div class="col-3">
-                    <label for="">Categoria</label>
-                    <select class="form-control" onchange="atualizarDados()" id="categoria">
+                    <label for="categoria">Categoria</label>
+                    <select
+                        class="form-control"
+                        onchange="atualizarDados()"
+                        id="categoria"
+                    >
                         <option>Categoria 1</option>
                         <option>Categoria 2</option>
                         <option>Categoria 3</option>
@@ -44,12 +60,25 @@
 
                 <!-- Ano -->
                 <div class="col-2">
-                    <label for="">Ano</label>
-                    <input type="number" class="form-control" onkeyup="atualizarDados()" id="ano">
+                    <label for="ano">Ano</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        onkeyup="atualizarDados()"
+                        id="ano"
+                    >
                 </div>
+
             </div>
             <br>
-            <a href="java:void(0)" onclick="cadastrar()" class="btn btn-lg btn-block btn-success">Cadastrar Filme</a>
+            <a
+                href="javascript:void(0)"
+                onclick="cadastrar()"
+                class="btn btn-lg btn-block btn-success"
+            >
+                Cadastrar Filme
+            </a>
+
         </form>
         <table class="table table-striped">
             <thead>
@@ -64,50 +93,6 @@
             </tbody>
         </table>
     </div>
+    <script type="text/javascript" src="scripts.js"></script>
 </body>
-<script type="text/javascript">
-
-    let dados = {
-        titulo: '',
-        ano: 0,
-        categoria: '',
-        link:'',
-    }
-
-    const atualizarDados = () => {
-        
-        dados = {
-            titulo: document.getElementById('titulo').value,
-            ano: document.getElementById('ano').value,
-            categoria: document.getElementById('categoria').value,
-            link:document.getElementById('link').value,
-        };
-
-        // Vai transformar o nosso objeto em string
-        document.getElementById('debug').innerHTML = JSON.stringify(dados)
-    };
-    
-    const montaItem = () => {
-        const item = document.createElement('tr')
-        const id = new Date().getTime(); //Id unico
-
-        item.insertAdjacentHTML(
-            'beforeEnd', 
-            `
-            <td>${dados.titulo}</td>
-            <td>${dados.categoria}</td>
-            <td>${dados.ano}</td>
-            <td class="text-right">
-                <button class="btn btn-info" data-url="${dados.link}">Acessar</button>
-                <button class="btn btn-danger" data-id="${id}">Excluir</button>
-            </td>`
-        );
-        return item;
-    };
-
-        const cadastrar = () =>{
-            document.getElementById('lista_filmes').appendChild(montaItem());
-            dados = {};
-        }
-    </script>
 </html>
